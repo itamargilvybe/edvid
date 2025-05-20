@@ -1,10 +1,8 @@
 // VideoFeed: Displays a grid of video cards and handles loading/error/empty states.
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { fetchVideos } from "@/lib/api";
 import Spinner from "@/components/ui/Spinner";
 import type { Video } from "@/types";
-import { useRouter } from "next/navigation";
 import { useAtom, useSetAtom } from "jotai";
 import { selectedVideoAtom, userAtom, videosAtom } from "@/state/atoms";
 import { useEffect } from "react";

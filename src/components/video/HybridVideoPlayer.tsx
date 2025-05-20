@@ -17,9 +17,10 @@ export default function HybridVideoPlayer({ url }: { url: string }) {
   const [fallback, setFallback] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const reactPlayerRef = useRef<any>(null);
+  const reactPlayerRef = useRef<ReactPlayer>(null);
   const videojsContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const playerRef = useRef<any>(null);
 
   // Fullscreen handler for both players
@@ -27,15 +28,6 @@ export default function HybridVideoPlayer({ url }: { url: string }) {
     if (fallback) {
       if (screenfull && screenfull.isEnabled && videojsContainerRef.current) {
         screenfull.request(videojsContainerRef.current);
-      }
-    } else {
-      if (
-        screenfull &&
-        screenfull.isEnabled &&
-        reactPlayerRef.current &&
-        reactPlayerRef.current.wrapper
-      ) {
-        screenfull.request(reactPlayerRef.current.wrapper);
       }
     }
   }, [fallback]);
@@ -84,7 +76,7 @@ export default function HybridVideoPlayer({ url }: { url: string }) {
           height="auto"
           controls
           onReady={() => setLoading(false)}
-          onError={(e) => {
+          onError={() => {
             setLoading(false);
             setError(true);
           }}

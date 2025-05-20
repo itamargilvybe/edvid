@@ -38,8 +38,8 @@ export default function CommentSection({ videoId }: { videoId: string }) {
       toast("Comment posted!", "success");
       queryClient.invalidateQueries({ queryKey: ["comments", videoId] });
     },
-    onError: (err: any) => {
-      toast(err?.response?.data?.message || "Failed to post comment", "error");
+    onError: (err: Error) => {
+      toast(err.message || "Failed to post comment", "error");
     },
   });
 

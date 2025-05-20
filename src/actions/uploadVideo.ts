@@ -29,7 +29,7 @@ export async function uploadVideoAction(
       ok: true,
       video: newVideo,
     };
-  } catch (e: any) {
-    return { message: e?.message || "Upload failed", ok: false };
+  } catch (e) {
+    return { message: typeof e === "string" ? e : "Upload failed", ok: false };
   }
 }

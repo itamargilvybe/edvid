@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import { selectedVideoAtom } from "@/state/atoms";
 import CommentSection from "@/components/comments/CommentSection";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import HybridVideoPlayer from "./HybridVideoPlayer";
 import Spinner from "@/components/ui/Spinner";
 import { X } from "lucide-react";
