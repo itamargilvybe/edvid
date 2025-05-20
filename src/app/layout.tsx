@@ -1,6 +1,9 @@
+// layout.tsx: Root layout for the app. Sets up global fonts and wraps children with client providers.
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ClientRootProvider from "@/providers/ClientRootProvider";
+import LayoutWithHeaderFooter from "@/components/ui/LayoutWithHeaderFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ClientRootProvider>
+          <LayoutWithHeaderFooter>{children}</LayoutWithHeaderFooter>
+        </ClientRootProvider>
       </body>
     </html>
   );
