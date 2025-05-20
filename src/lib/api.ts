@@ -9,7 +9,7 @@ import type {
   CreateCommentPayload,
 } from "@/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+const API_BASE = process.env.API_BASE;
 
 export async function fetchVideos() {
   // todo new backend endpoint that fetches all videos relevant to a user, not just by the user
