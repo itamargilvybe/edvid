@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import HybridVideoPlayer from "./HybridVideoPlayer";
 import Spinner from "@/components/ui/Spinner";
 import { X, Share } from "lucide-react";
+import { useToast } from "@/components/ui/Toast";
 
 export default function VideoPlayerModal({
   onClose,
@@ -15,6 +16,7 @@ export default function VideoPlayerModal({
 }) {
   const [video, setSelectedVideo] = useAtom(selectedVideoAtom);
   const [copied, setCopied] = useState(false);
+  const toast = useToast();
 
   const handleClose = () => {
     setSelectedVideo(null);
@@ -27,8 +29,8 @@ export default function VideoPlayerModal({
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch (err) {
-      // Optionally handle error
+    } catch {
+      toast("Failed to copy link");
     }
   };
 
