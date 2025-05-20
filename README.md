@@ -5,9 +5,13 @@ EdVid is an ed tech platform for sharing and discussing educational videos. Our 
 ## Features
 
 - **Video Uploads:** Easily upload and share educational videos with the community.
+  ![Upload Video](./screenshots/upload.png)
 - **Video Feed:** Browse a feed of videos uploaded by other users, with titles, descriptions, and users.
+  ![Feed](./screenshots/home.png)
 - **Hybrid Video Player:** Watch videos with a robust player that supports multiple formats and fullscreen mode.
+  ![Video](./screenshots/video.png)
 - **Threaded Comments:** Engage in discussions by commenting on videos. Comments are displayed in real time and support user identification.
+  ![Comments](./screenshots/comments.png)
 - **Collaborative Learning:** Join a vibrant community of educators and learners. Share, comment, and grow together.
 - **Responsive UI:** Clean, modern, and mobile-friendly interface.
 
@@ -26,7 +30,7 @@ Run Dev:
    ```bash
    npm install
    ```
-2. add a new .env file with API_BASE
+2. add a new .env file with NEXT_PUBLIC_API_BASE
 3. Run the development server:
    ```bash
    npm run dev

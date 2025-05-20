@@ -10,7 +10,7 @@ import type {
 } from "@/types";
 
 const API_BASE =
-  process.env.API_BASE ||
+  process.env.NEXT_PUBLIC_API_BASE ||
   "https://take-home-assessment-423502.uc.r.appspot.com";
 
 export async function fetchVideos() {

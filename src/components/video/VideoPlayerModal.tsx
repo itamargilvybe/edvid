@@ -3,10 +3,10 @@
 import { useAtom } from "jotai";
 import { selectedVideoAtom } from "@/state/atoms";
 import CommentSection from "@/components/comments/CommentSection";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import HybridVideoPlayer from "./HybridVideoPlayer";
 import Spinner from "@/components/ui/Spinner";
-import { X } from "lucide-react";
+import { X, Share } from "lucide-react";
 
 export default function VideoPlayerModal({
   onClose,
@@ -14,11 +14,22 @@ export default function VideoPlayerModal({
   onClose?: () => void;
 }) {
   const [video, setSelectedVideo] = useAtom(selectedVideoAtom);
+  const [copied, setCopied] = useState(false);
 
   const handleClose = () => {
     setSelectedVideo(null);
     window.location.hash = "";
     if (onClose) onClose();
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      // Optionally handle error
+    }
   };
 
   // Prevent background scroll when modal is open
@@ -57,15 +68,30 @@ export default function VideoPlayerModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header with Close Button */}
-        <button
-          className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-red-500 shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          onClick={handleClose}
-          aria-label="Close modal"
-          type="button"
-        >
-          <X size={22} />
-        </button>
-        <div>
+        <div className="absolute top-4 right-4 z-20 flex gap-2">
+          {copied && (
+            <span className="text-xs text-green-600 font-semibold px-2 py-1 bg-green-50 rounded shadow animate-fade-in-fast self-center">
+              Copied!
+            </span>
+          )}
+          <button
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-blue-500 shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            onClick={handleShare}
+            aria-label="Share video"
+            type="button"
+          >
+            <Share size={22} />
+          </button>
+          <button
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-red-500 shadow transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            onClick={handleClose}
+            aria-label="Close modal"
+            type="button"
+          >
+            <X size={22} />
+          </button>
+        </div>
+        <div className="pt-8 md:pt-12">
           <HybridVideoPlayer url={video.video_url} />
         </div>
         <div className="font-bold text-lg mb-1 mt-2 text-gray-900">
